@@ -1,34 +1,37 @@
-const mongoose = require("mongoose"); // Erase if already required
+const mongoose = require('mongoose');
 
-// The Schema of the Project model
-var projectSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  description: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  author: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  issues: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Issue",
-    },
-  ],
-  labels: [
-    {
+const projectSchema = new mongoose.Schema(
+  {
+    name: {
       type: String,
+      trim: true,
+      required: true,
     },
-  ],
-});
+    description: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    issues: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Issue',
+      },
+    ],
+    labels: [
+      {
+        type: String,
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-//Export the model
-module.exports = mongoose.model("Project", projectSchema);
+const Project = mongoose.model('Project', projectSchema);
+
+module.exports = Project;
